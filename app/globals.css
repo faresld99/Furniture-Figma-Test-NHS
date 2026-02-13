@@ -1,6 +1,79 @@
 @import "tailwindcss";
 
+/* ========== FONTS ========== */
+@font-face {
+  font-family: "Gilroy";
+  src: url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Regular.woff") format("woff"),
+       url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Medium.woff") format("woff"),
+       url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-SemiBold.woff") format("woff"),
+       url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Bold.woff") format("woff"),
+       url("https://cdn.jsdelivr.net/npm/@qpokychuk/gilroy@1.0.2/src/Gilroy-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ========== DESIGN TOKENS (Figma) ========== */
 :root {
+  /* Colors */
+  --color-primary: #F57E00;
+  --color-primary-alt: #F47E00;
+  --color-text: #1E1E1E;
+  --color-text-muted: #8D8D8D;
+  --color-text-dark: #091B3C;
+  --color-white: #FFFFFF;
+  --color-bg: #F7F7F7;
+  --color-bg-card: #FAFAFA;
+  --color-accent: #FF911C;
+  --color-accent-alt: #FF911D;
+  --color-star: #FFB461;
+  --color-icon-dark: #1B2834;
+  --color-copyright: #1B2934;
+  --color-filter-bg: #EEEEEE;
+
+  /* Fonts */
+  --font-gilroy: "Gilroy", sans-serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+
+  /* Typography */
+  --typo-h1-size: 28px;
+  --typo-h1-line: 33px;
+  --typo-h2-size: 42px;
+  --typo-h2-line: 49px;
+  --typo-h3-size: 24px;
+  --typo-h3-line: 28px;
+  --typo-label-size: 18px;
+  --typo-label-line: 21px;
+  --typo-body-size: 18px;
+  --typo-body-line: 185%;
+  --typo-body-sm-size: 16px;
+  --typo-body-sm-line: 185%;
+  --typo-caption-size: 14px;
+  --typo-caption-line: 185%;
+  --typo-small-size: 12px;
+  --typo-small-line: 14px;
+
+  /* Legacy (body/theme) */
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -8,8 +81,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-secondary: var(--color-text);
+  --color-secondary-bg: var(--color-bg);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +92,173 @@
   }
 }
 
+/* ========== BASE ========== */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+/* ========== UTILITY CLASSES ========== */
+/* Font family */
+.font-gilroy {
+  font-family: var(--font-gilroy);
+}
+
+.font-dm-sans {
+  font-family: var(--font-dm-sans);
+}
+
+/* Typography */
+.typo-h1 {
+  font-family: var(--font-gilroy);
+  font-weight: 700;
+  font-size: var(--typo-h1-size);
+  line-height: var(--typo-h1-line);
+}
+
+.typo-h2 {
+  font-family: var(--font-gilroy);
+  font-weight: 700;
+  font-size: var(--typo-h2-size);
+  line-height: var(--typo-h2-line);
+}
+
+.typo-h3 {
+  font-family: var(--font-gilroy);
+  font-weight: 700;
+  font-size: var(--typo-h3-size);
+  line-height: var(--typo-h3-line);
+}
+
+.typo-label {
+  font-family: var(--font-gilroy);
+  font-weight: 600;
+  font-size: var(--typo-label-size);
+  line-height: var(--typo-label-line);
+}
+
+.typo-body {
+  font-family: var(--font-gilroy);
+  font-weight: 400;
+  font-size: var(--typo-body-size);
+  line-height: var(--typo-body-line);
+}
+
+.typo-body-sm {
+  font-family: var(--font-gilroy);
+  font-weight: 400;
+  font-size: var(--typo-body-sm-size);
+  line-height: var(--typo-body-sm-line);
+}
+
+.typo-caption {
+  font-family: var(--font-gilroy);
+  font-weight: 500;
+  font-size: var(--typo-caption-size);
+  line-height: var(--typo-caption-line);
+}
+
+.typo-small {
+  font-family: var(--font-gilroy);
+  font-weight: 400;
+  font-size: var(--typo-small-size);
+  line-height: var(--typo-small-line);
+}
+
+/* Colors (text) */
+.text-token {
+  color: var(--color-text);
+}
+
+.text-token-muted {
+  color: var(--color-text-muted);
+}
+
+.text-token-dark {
+  color: var(--color-text-dark);
+}
+
+.text-primary-token {
+  color: var(--color-primary);
+}
+
+.text-primary-alt {
+  color: var(--color-primary-alt);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-accent-alt {
+  color: var(--color-accent-alt);
+}
+
+/* Colors (bg) */
+.bg-token {
+  background-color: var(--color-bg);
+}
+
+.bg-primary-token {
+  background-color: var(--color-primary);
+}
+
+.bg-primary-alt {
+  background-color: var(--color-primary-alt);
+}
+
+.bg-bg-card {
+  background-color: var(--color-bg-card);
+}
+
+/* ========== LAYOUT ========== */
+.section-container {
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* ========== SWIPER ========== */
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: white;
+  color: black;
+  font-size: 1.125rem;
+  border: 1px solid var(--color-primary);
+}
+
+.swiper-button-prev:after:hover,
+.swiper-button-next:after:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* ========== CAROUSEL NAV ========== */
+.carousel-nav-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 26.087px;
+  box-shadow: 0px 7.03125px 19.5312px rgba(0, 0, 0, 0.06);
+  padding: 11.9565px;
+}
+
+/* ========== MISC ========== */
+.dark {
+  background-color: rgb(17 24 39);
+  color: white;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

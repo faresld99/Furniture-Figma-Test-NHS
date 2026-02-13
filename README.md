@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Panto – Furniture Landing Page
 
-## Getting Started
+Landing page pour une marque de mobilier, développée avec Next.js et alignée sur un design Figma.
 
-First, run the development server:
+## Stack technique
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **Tailwind CSS 4**
+- **TypeScript**
+- **Swiper** (carousels)
+- **Lucide React** + **react-icons** (icônes)
+
+## Démarrage
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure du projet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+my-panto-test-app/
+├── app/                    # Routing Next.js (page, layout, globals.css)
+├── components/             # Composants React
+│   ├── home/               # Sections page d'accueil (Hero, Experiences, etc.)
+│   ├── shop/               # Produits (Products, ProductCard)
+│   └── ui/                 # Composants réutilisables (SectionHeading, MoreInfoLink, CarouselArrow)
+├── context/                # Providers React (Thème, etc.)
+├── hooks/                  # Hooks personnalisés (useClickOutside)
+├── lib/                    # Logique partagée
+│   ├── config/             # Configuration (assets, chemins)
+│   ├── constants/          # Données par domaine (products, navigation, testimonials, footer)
+│   └── types.ts            # Types dérivés des constantes
+└── public/
+    └── assets/             # Images et assets statiques
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Détails d’implémentation
 
-## Learn More
+### Organisation des composants
 
-To learn more about Next.js, take a look at the following resources:
+- **PascalCase** pour les fichiers de composants (`Hero.tsx`, `ProductCard.tsx`)
+- `components/home/` : sections de la page d’accueil (Hero, ChooseUs, Experiences, Materials, Testimonials, HeroHotspots)
+- `components/shop/` : catalogue produits et cartes
+- `components/ui/` : composants génériques réutilisables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Constantes et données
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Les données sont centralisées dans `lib/constants/` par domaine :
 
-## Deploy on Vercel
+| Fichier           | Contenu                                      |
+|-------------------|-----------------------------------------------|
+| `products.ts`     | `CATEGORIES`, `PRODUCTS`                      |
+| `choose-us.ts`    | `CHOOSE_US_FEATURES`                          |
+| `testimonials.ts` | `REVIEWS`                                     |
+| `navigation.ts`   | `NAV_LINKS`                                   |
+| `footer.ts`       | `FOOTER_SERVICES`, `FOOTER_ABOUT`             |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Imports via `@/lib/constants` (réexport via `index.ts`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Config des assets
+
+Les chemins des images sont centralisés dans `lib/config/assets.ts` :
+
+```ts
+import { ASSETS } from "@/lib/config/assets";
+
+// Exemple
+<Image src={ASSETS.banner} />
+style={{ backgroundImage: `url('${ASSETS.experiences}')` }}
+```
+
+### Types
+
+Les types sont dérivés des constantes dans `lib/types.ts` pour garder la cohérence :
+
+```ts
+export type Product = (typeof PRODUCTS)[number];
+export type Category = (typeof CATEGORIES)[number];
+// etc.
+```
+
+### Design tokens
+
+Les variables CSS (couleurs, typo, etc.) sont définies dans `app/globals.css` avec des classes utilitaires (`typo-h2`, `text-token`, `bg-token`, `font-gilroy`, etc.).
+
+### Alias d’import
+
+`@/*` pointe vers la racine du projet (`tsconfig.json`) pour les imports courts :
+
+```ts
+import { ASSETS } from "@/lib/config/assets";
+import { CATEGORIES } from "@/lib/constants";
+import { useClickOutside } from "@/hooks/useClickOutside";
+```
+
+## Scripts
+
+| Commande     | Description              |
+|--------------|--------------------------|
+| `npm run dev`  | Démarre le serveur de dev |
+| `npm run build`| Build de production       |
+| `npm run start`| Lance le build en prod    |
