@@ -7,7 +7,7 @@ type Props = { product: Product };
 export default function ProductCard({ product }: Props) {
   return (
     <article
-      className="flex shrink-0 flex-col overflow-visible bg-white rounded-[20px] opacity-100"
+      className="group flex shrink-0 flex-col bg-white rounded-[20px] opacity-100 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
       style={{
         width: "268.08673095703125px",
         height: "430px",
@@ -18,7 +18,7 @@ export default function ProductCard({ product }: Props) {
         style={{ height: "239.15px" }}
       >
         <div
-          className="absolute bottom-0 left-1/2 z-10 flex flex-col items-center overflow-visible"
+          className="absolute bottom-0 left-1/2 z-10 flex flex-col items-center overflow-visible transition-transform duration-400 ease-out group-hover:-translate-y-1"
           style={{ transform: "translateX(-50%) translateY(-32px)" }}
         >
           <div
@@ -31,7 +31,7 @@ export default function ProductCard({ product }: Props) {
             }}
           />
           <div
-            className="relative z-10 overflow-visible"
+            className="relative z-10 overflow-visible transition-transform duration-400 ease-out group-hover:scale-105"
             style={{
               width: "217.9px",
               height: "255.9px",
@@ -74,19 +74,44 @@ export default function ProductCard({ product }: Props) {
           ))}
         </div>
         <div className="mt-3 flex flex-row items-center justify-between">
-          <span className="font-gilroy font-semibold text-token-dark">
-            <span className="text-[15.2322px] leading-[18px]">$ </span>
-            <span className="text-[21.3251px] leading-[26px]">
+          <span
+            className="inline-flex items-baseline gap-0.5"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontWeight: 600,
+              color: "#091B3C",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "15.2322px",
+                lineHeight: "18px",
+                transform: "translateY(-2px)",
+              }}
+            >
+              ${" "}
+            </span>
+            <span style={{ fontSize: "21.3251px", lineHeight: "26px" }}>
               {product.price.replace(/^\$\s*/, "")}
             </span>
           </span>
           <button
             type="button"
-            className="flex shrink-0 items-center justify-center rounded-full text-white transition hover:opacity-90 w-[48.74px] h-[48.74px] p-[12.1858px] rounded-[31px]"
+            className="flex shrink-0 items-center justify-center rounded-full text-white transition-all duration-300 ease-out hover:scale-110 hover:shadow-md w-[48.74px] h-[48.74px] p-[12.1858px] rounded-[31px]"
             style={{ backgroundColor: "var(--color-text-dark)" }}
             aria-label="Ajouter au panier"
           >
-            <svg width="24.37" height="24.37" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+            <svg 
+              width="24.37" 
+              height="24.37" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              className="text-white"
+            >
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>

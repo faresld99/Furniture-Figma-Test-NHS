@@ -60,7 +60,7 @@ export default function Testimonials() {
         >
           {REVIEWS.map((review, index) => (
             <SwiperSlide key={index} className="!h-auto flex justify-center">
-              <div className="relative w-full max-w-[370px] min-h-[530px]">
+              <div className="relative w-full max-w-[370px] min-h-[530px] group">
                 <div
                   className="absolute bg-cover bg-center"
                   style={{
@@ -76,12 +76,14 @@ export default function Testimonials() {
                   }}
                 />
 
-                <div className="absolute inset-0 overflow-hidden rounded-[18.1182px]" style={{ height: 506 }}>
+                <div 
+                  className="absolute inset-0 rounded-[18.1182px] transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-2" 
+                  style={{ height: 506 }}
+                >
                   <div
-                    className="absolute top-0 left-0 w-full h-[476px] bg-cover bg-center overflow-hidden"
+                    className="absolute top-0 left-0 w-full h-[476px] bg-cover bg-center rounded-[18.1182px] overflow-hidden transition-transform duration-700 ease-out group-hover:scale-105"
                     style={{
                       backgroundImage: `url(${review.coverImg})`,
-                      borderRadius: "18.1182px",
                       transform: "matrix(-1, 0, 0, 1, 0, 0)",
                       boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.04)",
                     }}
@@ -89,26 +91,26 @@ export default function Testimonials() {
                 </div>
 
                 <div
-                  className="absolute z-10 w-[334px] max-w-[calc(100%-36px)] left-1/2 -translate-x-1/2 top-[250px]"
+                  className="absolute z-10 w-[334px] max-w-[calc(100%-36px)] left-1/2 -translate-x-1/2 top-[250px] transition-all duration-500 ease-out group-hover:-translate-y-3 group-hover:scale-[1.02]"
                   style={{
                     background: "#FFFFFF",
                     backdropFilter: "blur(5.5px)",
                     borderRadius: "10px",
                   }}
                 >
-                  <div className="absolute left-1/2 -translate-x-1/2 -top-[33px] w-[66px] h-[66px] rounded-full bg-white overflow-hidden flex items-center justify-center">
+                  <div className="absolute left-1/2 -translate-x-1/2 -top-[33px] w-[66px] h-[66px] rounded-full bg-white overflow-hidden flex items-center justify-center transition-all duration-500 ease-out group-hover:scale-110 group-hover:shadow-lg">
                     <Image
                       src={review.image}
                       alt={review.name}
                       width={50}
                       height={50}
-                      className="w-[50px] h-[50px] rounded-full object-cover"
+                      className="w-[50px] h-[50px] rounded-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     />
                   </div>
 
                   <div className="relative w-[327px] max-w-[calc(100%-14px)] min-h-[209px] mx-auto pt-[38px] px-[3.5px] pb-[34px] text-center">
                     <h3
-                      className="font-bold text-[18px] leading-[21px] text-[#1E1E1E] capitalize mb-1"
+                      className="font-bold text-[18px] leading-[21px] text-[#1E1E1E] capitalize mb-1 transition-colors duration-300 group-hover:text-[#FF911C]"
                       style={{ fontFamily: "Gilroy, sans-serif" }}
                     >
                       {review.name}
@@ -120,12 +122,14 @@ export default function Testimonials() {
                       {review.role}
                     </p>
                     <p
-                      className="font-normal text-[14px] leading-[16px] text-[#1E1E1E] opacity-80 mb-5 max-w-[252px] mx-auto"
+                      className="font-normal text-[14px] leading-[16px] text-[#1E1E1E] opacity-80 mb-5 max-w-[252px] mx-auto transition-opacity duration-300 group-hover:opacity-100"
                       style={{ fontFamily: "Gilroy, sans-serif" }}
                     >
                       &quot;{review.review}&quot;
                     </p>
-                    <StarRating rating={review.rating} />
+                    <div className="transition-transform duration-300 ease-out group-hover:scale-110">
+                      <StarRating rating={review.rating} />
+                    </div>
                   </div>
                 </div>
               </div>

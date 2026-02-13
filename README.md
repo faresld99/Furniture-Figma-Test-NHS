@@ -45,6 +45,7 @@ my-panto-test-app/
 - `components/home/` : sections de la page d’accueil (Hero, ChooseUs, Experiences, Materials, Testimonials, HeroHotspots)
 - `components/shop/` : catalogue produits et cartes
 - `components/ui/` : composants génériques réutilisables
+- `components/Navbar.tsx` : barre de navigation (logo, liens, panier, menu mobile)
 
 ### Constantes et données
 

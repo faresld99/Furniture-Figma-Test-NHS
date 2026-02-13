@@ -33,19 +33,28 @@ export default function Products() {
 
         {/* Filtres par catégorie (Chair, Beds, etc.) */}
         <div className="mb-8 md:mb-10 flex justify-center p-1.5 rounded-[44px] w-fit max-w-full mx-auto overflow-x-auto scrollbar-hide" style={{ background: "var(--color-filter-bg)" }}>
-          <div className="flex flex-row items-center gap-2 sm:gap-2.5 flex-nowrap">
+          <div className="flex flex-row items-center gap-2 sm:gap-2.5 flex-nowrap relative">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`flex flex-none flex-row items-center justify-center transition px-1 w-[84px] h-[45px] rounded-[32px] typo-body text-token opacity-80 ${
-                  activeCategory === cat ? "font-medium bg-white" : "font-normal bg-transparent"
+                className={`cursor-pointer flex flex-none flex-row items-center justify-center transition-all duration-300 ease-out px-1 w-[84px] h-[45px] rounded-[32px] typo-body text-token opacity-80 relative z-10 ${
+                  activeCategory === cat ? "font-medium text-token" : "font-normal"
                 }`}
               >
                 {cat}
               </button>
             ))}
+            {/* Background blanc qui suit la catégorie active */}
+            <div
+              className="absolute bg-white rounded-[32px] transition-all duration-300 ease-out"
+              style={{
+                width: "84px",
+                height: "45px",
+                transform: `translateX(${CATEGORIES.indexOf(activeCategory) * (84 + 10)}px)`,
+              }}
+            />
           </div>
         </div>
 
@@ -55,7 +64,7 @@ export default function Products() {
             direction="left"
             onClick={() => scroll("left")}
             ariaLabel="Précédent"
-            className="hidden sm:flex left-2 lg:left-[31px] top-1/2 -translate-y-1/2"
+            className="hidden sm:flex left-2 lg:left-[31px] top-1/2 -translate-y-1/2 cursor-pointer"
             style={{}}
           />
 
@@ -76,7 +85,7 @@ export default function Products() {
             direction="right"
             onClick={() => scroll("right")}
             ariaLabel="Suivant"
-            className="hidden sm:flex right-2 lg:right-[56px] top-1/2 -translate-y-1/2"
+            className="hidden sm:flex right-2 lg:right-[56px] top-1/2 -translate-y-1/2 cursor-pointer"
             style={{}}
           />
         </div>

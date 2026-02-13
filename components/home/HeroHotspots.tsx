@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
 
 // Couleurs disponibles pour le sélecteur dans les bulles
@@ -173,12 +173,34 @@ function HeroHotspotPoint({
   );
 }
 
-// Hotspot spécifique pour le canapé (position différente des autres)
+// Hotspot spécifique pour le canapé avec animation d'introduction
 function HeroHotspotCanape() {
   const [open, setOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState<ColorId>("orange");
+  const [isPulsing, setIsPulsing] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   useClickOutside(containerRef, open, () => setOpen(false));
+
+  // Animation d'introduction : ouvrir le tooltip pendant 3s puis arrêter le clignotement
+  useEffect(() => {
+    // Ouvrir immédiatement au chargement
+    setOpen(true);
+    
+    const timer = setTimeout(() => {
+      setOpen(false);
+      setIsPulsing(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleClick = () => {
+    setOpen((v) => !v);
+    // Arrêter le clignotement dès la première interaction manuelle
+    if (isPulsing) {
+      setIsPulsing(false);
+    }
+  };
 
   return (
     <div
@@ -193,13 +215,15 @@ function HeroHotspotCanape() {
       role="group"
       aria-label="Canapé"
     >
+      {/* Tooltip avec animation de fade-in/out */}
       {open && (
         <div
-          className="absolute left-0"
+          className="absolute left-0 animate-fade-in"
           style={{
             top: `${81.6 - 12 - BUBBLE_HEIGHT}px`,
             width: "112px",
             height: BUBBLE_HEIGHT,
+            animation: "fadeIn 0.3s ease-out forwards",
           }}
         >
           <TooltipBubble
@@ -208,9 +232,11 @@ function HeroHotspotCanape() {
           />
         </div>
       )}
+      
+      {/* Bouton avec clignotement pendant 3s au chargement */}
       <button
         type="button"
-        className="absolute flex cursor-pointer items-center justify-center rounded-full transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-panto-orange"
+        className={`absolute flex cursor-pointer items-center justify-center rounded-full transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-panto-orange ${isPulsing ? "blink" : ""}`}
         style={{
           left: "28px",
           top: "81.6px",
@@ -224,13 +250,48 @@ function HeroHotspotCanape() {
         }}
         aria-label="Voir le canapé"
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
+        onClick={handleClick}
       >
+        {/* Point blanc central avec effet de scale */}
         <span
           className="rounded-full bg-white"
-          style={{ width: "18px", height: "18px", transform: "rotate(180deg)" }}
+          style={{ 
+            width: "18px", 
+            height: "18px", 
+            animation: isPulsing ? "scalePoint 1.5s ease-in-out infinite" : "none",
+            transform: isPulsing ? undefined : "rotate(180deg)",
+          }}
         />
       </button>
+      
+      <style jsx>{`
+        .blink {
+          animation: blink 1.4s ease-in-out infinite;
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.35; }
+        }
+        @keyframes scalePoint {
+          0%, 100% {
+            transform: rotate(180deg) scale(1);
+          }
+          50% {
+            transform: rotate(180deg) scale(1.5);
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }
