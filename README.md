@@ -56,7 +56,7 @@ Les données sont centralisées dans `lib/constants/` par domaine :
 | `choose-us.ts`    | `CHOOSE_US_FEATURES`                          |
 | `testimonials.ts` | `REVIEWS`                                     |
 | `navigation.ts`   | `NAV_LINKS`                                   |
-| `footer.ts`       | `FOOTER_SERVICES`, `FOOTER_ABOUT`             |
+| `footer.ts`       | `FOOTER_SERVICES`, `FOOTER_FURNITURE`         |
 
 Imports via `@/lib/constants` (réexport via `index.ts`).
 

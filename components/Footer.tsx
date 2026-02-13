@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
-import { FOOTER_SERVICES, FOOTER_ABOUT } from "@/lib/constants";
+import { FOOTER_SERVICES, FOOTER_FURNITURE } from "@/lib/constants";
 
 const footerLinkClass = "font-gilroy font-medium text-[15px] leading-[160%] text-token opacity-80 hover:opacity-100 transition-opacity";
 
-// Colonne réutilisable (Services, About, Follow Us)
+// Colonne réutilisable (Services, Furniture, Follow Us)
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
@@ -44,8 +44,8 @@ export default function Footer() {
           ))}
         </FooterColumn>
 
-        <FooterColumn title="About">
-          {FOOTER_ABOUT.map((item) => (
+        <FooterColumn title="Furniture">
+          {FOOTER_FURNITURE.map((item) => (
             <li key={item}>
               <Link href="#" className={footerLinkClass}>
                 {item}
