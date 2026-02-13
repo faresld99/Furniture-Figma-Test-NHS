@@ -99,8 +99,23 @@ import { useClickOutside } from "@/hooks/useClickOutside";
 
 ## Scripts
 
-| Commande     | Description              |
-|--------------|--------------------------|
-| `npm run dev`  | Démarre le serveur de dev |
-| `npm run build`| Build de production       |
-| `npm run start`| Lance le build en prod    |
+| Commande       | Description                |
+|----------------|----------------------------|
+| `npm run dev`  | Démarre le serveur de dev  |
+| `npm run build`| Build de production        |
+| `npm run start`| Lance le build en prod     |
+| `npm test`     | Lance les tests unitaires  |
+| `npm run test:watch` | Mode watch pour les tests |
+
+## Tests unitaires
+
+Tests avec **Jest** et **React Testing Library** :
+
+- `components/ui/SectionHeading.test.tsx` – en-têtes de section
+- `components/shop/ProductCard.test.tsx` – cartes produit
+- `components/shop/Products.test.tsx` – section produits et filtres
+- `components/Navbar.test.tsx` – navigation (logo, liens, menu mobile)
+- `components/Footer.test.tsx` – pied de page
+- `lib/constants/index.test.ts` – constantes partagées
+
+Config : `jest.config.ts`, `jest.setup.ts`.
